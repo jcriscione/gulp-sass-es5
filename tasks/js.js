@@ -4,11 +4,13 @@ const tasks = (gulp, options, plugins) => {
   gulp.task('js:dev', () => {
     return gulp.src(path.join(options.root, 'js/app/**/*.js'))
     .pipe(plugins.sourcemaps.init({loadMaps: true}))
+    .pipe(plugins.concat('main.js'))
     .pipe(plugins.sourcemaps.write('./'))
     .pipe(gulp.dest(path.join(options.dest, 'js')))
   })
   gulp.task('js:lib', () => {
     return gulp.src(path.join(options.root, 'js/lib/**/*.js'))
+    .pipe(plugins.concat('lib.js'))
     .pipe(gulp.dest(path.join(options.dest, 'js')))
   })
 
@@ -16,6 +18,7 @@ const tasks = (gulp, options, plugins) => {
     return gulp.src(path.join(options.root, 'js/app/**/*.js'))
     .pipe(plugins.sourcemaps.init({loadMaps: true}))
     .pipe(plugins.uglify())
+    .pipe(plugins.concat('main.js'))
     .pipe(plugins.sourcemaps.write('./'))
     .pipe(gulp.dest(path.join(options.dest, 'js')))
   })
